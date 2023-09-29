@@ -18,3 +18,25 @@
 	$('#example_info').css('padding', '20px 15px');
 	$('#example_paginate').css('padding', '15px');
 </script>
+
+<!-- <script>
+	document.querySelector("input[type-currency='IDR']").foreach((element) => {
+		element.addEventListener('keyup', function(e) {
+			let cursorPosition = this.selectionStart;
+			let value = parseInt(this.value.replace(/[^,\d]/g, ''));
+			let originalLength = this.value.length;
+
+			if(isNan(value)) {
+				this.value = '';
+			} else {
+				this.value = value.toLocaleString('id-ID', {
+					currency: 'IDR',
+					style: 'currency',
+					minimunFractionDigits: 0
+				});
+				cursorPosition = $this.value.length - originalLength + cursorPosition;
+				this.setSelectionRange(cursorPosition, cursorPosition);
+			}
+		})
+	})
+    </script> -->

@@ -32,7 +32,7 @@
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-          <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
+          <a href="{{ route('admin.profile.edit') }}" class="dropdown-item">Profile</a>
           <!-- <div class="dropdown-divider"></div> -->
           <form method="POST" action="{{ route('logout') }}">
             @csrf

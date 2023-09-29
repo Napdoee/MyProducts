@@ -38,10 +38,10 @@
             <form method="POST" action="{{ route('login') }}" autocomplete="off" novalidate>
                 @csrf
               <div class="mb-3">
-                <label class="form-label">{{ __('Email Address') }}</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="your@email.com" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <label class="form-label">{{ __('Email Address/Username') }}</label>
+                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" placeholder="Your Email/Username" value="{{ old('login') }}" required autocomplete="login" autofocus>
 
-                @error('email')
+                @error('login')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

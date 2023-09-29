@@ -8,15 +8,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
+    function checkRoles($req) 
+    {
+        return User::checkIfAdmin($req) ? 'admin' : 'user';
+    }
+
     /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        $roles = $this->checkRoles($request);
+
+        return view("$roles.profile", [
             'user' => $request->user(),
         ]);
     }
@@ -26,6 +34,8 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $roles = $this->checkRoles($request);
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -34,7 +44,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with([
+        return Redirect::route("$roles.profile")->with([
             'message' => 'Profile updated',
             'status' => 'success',
         ]);

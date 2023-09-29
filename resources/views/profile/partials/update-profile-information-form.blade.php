@@ -1,5 +1,5 @@
 <h3 class="card-title">Profile Information</h3>
-<p class="card-subtitle">Update your account's profile inforamtion and email address.</p>
+<p class="card-subtitle">Update your account's profile information and email address.</p>
 <form id="send-verification" method="post" action="{{ route('verification.send') }}">
     @csrf
 </form>
@@ -38,14 +38,14 @@
         @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
             <div>
                 <p>
-                    Your email address is unverified.
-                    <button form="send-verification">
+                    <div class="form-label">Your email address is unverified.</div>
+                    <button form="send-verification" class="btn btn-outline-secondary">
                         Click here to re-send the verification email.
                     </button>
                 </p>
 
                 @if (session('status') === 'verification-link-sent')
-                    <p>'A new verification link has been sent to your email address.</p>
+                    <p class="text-muted">A new verification link has been sent to your email address.</p>
                 @endif
             </div>
         @endif

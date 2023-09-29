@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -17,7 +18,15 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public static function redirectWithRoles(Request $request, Array $param = null){
+        if($request->user()->roles == User::ROLE_ADMIN){
+            return redirect()->route('admin.dashboard', $param);
+        }
+
+        return redirect()->route('home', $param);
+    }
+
+    // public const HOME = '/home';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
