@@ -18,4 +18,9 @@ class HomeController extends Controller
     {
         return view('dashboard');
     }
+
+    public function productDetail(Product $product) {
+        // dd($product);
+        return view('product-detail', compact('product'));
+    }
 }

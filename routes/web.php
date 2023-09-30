@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/product/{product:slug}', [HomeController::class, 'productDetail'])->name('product.details');
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function() {
 	Route::get('/', [HomeController::class, 'dashboard']);
@@ -29,7 +30,9 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified']
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 	Route::resource('product', ProductController::class, ['except' => [
 		'create', 'show'
-	]]);
+	]])->parameters([
+		'product' => 'product:slug'
+	]);
 	Route::resource('category', CategoryController::class, ['except' => [
 		'create', 'show'
 	]]);

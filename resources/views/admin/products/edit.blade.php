@@ -17,7 +17,7 @@
 
 @section('content')
 <div class="card">
-	<form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+	<form action="{{ route('admin.product.update', $product->slug) }}" method="POST" enctype="multipart/form-data">
 		@method('PUT')
 		@csrf
 		<div class="card-body">
@@ -31,8 +31,9 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Description</label>
-				<input type="text" class="form-control @error('description') is-invalid @enderror" name="description" 
-				placeholder="Description" value="{{ old('description', $product->description) }}">	
+				<!-- <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" 
+				placeholder="Description" value="{{ old('description', $product->description) }}">	 -->
+				<textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description"  id="tinymce-mytextarea">{{ old('description', $product->description) }}</textarea>
 				@error('description')
 				<span class="invalid-feedback">{{ $message }}</span>
 				@enderror

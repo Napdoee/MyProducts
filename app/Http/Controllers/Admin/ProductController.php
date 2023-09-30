@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Discount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -37,6 +38,7 @@ class ProductController extends Controller
 		$request['category_id'] = $request->category;
 		$request['discount_id'] = $request->discount;
 		$request['image'] = $img;
+		$request['slug'] = Str::slug($request->name);
 
 		$product = Product::create($request->all());
 
@@ -77,9 +79,15 @@ class ProductController extends Controller
 			$img = $product->image;
 		}
 
+		$slug = $product->slug;
+		if($product->name != $request->name) {
+			$slug = Str::slug($request->name);
+		}
+
 		$request['category_id'] = $request->category;
 		$request['discount_id'] = $request->discount;
 		$request['image'] = $img;
+		$request['slug'] = $slug;
 		
 		$product->update($request->all());
 

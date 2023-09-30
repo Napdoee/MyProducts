@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table) {
-            $table->string('roles')->default('user');
+        Schema::table('products', function($table) {
+            $table->string('slug')->after('name');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table) {
-            $table->dropColumn('roles');
+        Schema::table('products', function($table) {
+            $table->dropColumn('slug');
         });
     }
 };

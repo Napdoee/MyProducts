@@ -37,8 +37,6 @@
 					<tr>
 						<th width="20%">Image</th>
 						<th>Product Name</th>
-						<th>Description</th>
-						<th>Category</th>
 						<th>Price Per Item</th>
 						<th>Stock</th>
 						<th>Discount</th>
@@ -56,8 +54,6 @@
 						@endif
 					</td>
 					<td >{{ $row->name }}</td>
-					<td >{{ $row->description }}</td>
-					<td >{{ $row->category->category_name }}</td>
 					<td >Rp. {{ number_format($row->price)  }}</td>
 					<td >{{ $row->stock }}</td>
 					<td >
@@ -69,7 +65,7 @@
 						@endif
 					</td>
 					<td class="flex justify-center items-center">
-						<a class="btn btn-info d-inline-block" href="{{ route('admin.product.edit', $row->id) }}">
+						<a class="btn btn-info d-inline-block" href="{{ route('admin.product.edit', $row->slug) }}">
 							<svg xmlns="http://www.w3.org/2000/svg" class="icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 							   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 							   <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
@@ -77,7 +73,7 @@
 							   <path d="M16 5l3 3"></path>
 							</svg>
 						</a>
-						<form action="{{ route('admin.product.destroy', $row->id) }}" method="POST" class="d-inline-block">
+						<form action="{{ route('admin.product.destroy', $row->slug) }}" method="POST" class="d-inline-block">
 							@csrf
 							@method('DELETE')
 							<button type="submit" class="btn btn-danger" >
@@ -119,8 +115,9 @@
 						</div>
 						<div class="mb-3">
 							<label class="form-label">Description</label>
-							<input type="text" class="form-control @error('description') is-invalid @enderror" name="description" 
-							placeholder="Description" value="{{ old('description') }}">	
+							<!-- <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" 
+							placeholder="Description" value="{{ old('description') }}">	 -->
+							<textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description"  id="tinymce-mytextarea">{{ old('description') }}</textarea>
 							@error('description')
 							<span class="invalid-feedback">{{ $message }}</span>
 							@enderror
