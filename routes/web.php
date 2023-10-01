@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +21,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Public 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/products', [HomeController::class, 'products'])->name('product');
 Route::get('/product/{product:slug}', [HomeController::class, 'productDetail'])->name('product.details');
 
+//Admin Only 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function() {
 	Route::get('/', [HomeController::class, 'dashboard']);
 	Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
@@ -45,13 +49,18 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified']
 	]]);
 });
 
+//Must auth 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('user.profile.edit');
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::name('user.')->middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//Mush auth and verified
+Route::middleware(['auth', 'verified'])->group(function () {
+	Route::resource('cart', CartController::class, ['only' => [
+		'index', 'store', 'update', 'destroy'
+	]]);
 });
 
 require __DIR__.'/auth.php';

@@ -16,6 +16,18 @@ class Product extends Model
         'price', 'stock', 'image', 'slug'
     ];
 
+    public function getPrice()
+    {
+        $discountPrice = (100/100 - $this->discount->discount_percent/100) * $this->price;
+
+        return $this->getDiscountStatus() ? $discountPrice : $this->price;
+    }
+
+    public function getDiscountStatus()
+    {
+        return $this->discount_id && $this->discount->active === 1;
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

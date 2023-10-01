@@ -44,7 +44,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route("$roles.profile")->with([
+        return Redirect::route("$roles.profile.edit")->with([
             'message' => 'Profile updated',
             'status' => 'success',
         ]);

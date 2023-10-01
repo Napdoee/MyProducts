@@ -10,7 +10,7 @@
       <div class="card-body p-0">
         <div id="carousel-captions" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner ">
-            @foreach($products as $row)
+            @foreach($products->take(2) as $row)
             <div class="carousel-item py-3 @if($loop->first) active @endif">
               <img class="d-block w-100" alt="{{ $row->name }}" src="{{ asset('storage/images/'.$row->image) }}" style="max-height: 70vh; object-fit: contain; object-position: top;">
               <div class="carousel-caption-background d-none d-md-block"></div>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <h1 class="display-6 fw-bolder">List Products</h1>
+    <h1 class="display-6 fw-bolder">New Products</h1>
     @foreach($products as $row)
     @php 
         $discountInStatus = ($row->discount_id && $row->discount->active === 1);

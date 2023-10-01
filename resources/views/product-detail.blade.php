@@ -3,9 +3,6 @@
 
 @php
     $discountInStatus = ($product->discount_id && $product->discount->active === 1);
-    if($discountInStatus) {
-        $discountText = (100/100 - $product->discount->discount_percent/100) * $product->price;
-    }
 @endphp
 
 @section('content')
@@ -23,24 +20,30 @@
 		<div class="small mb-1">{{ $product->category->category_name }}</div>
 		<h1 class="display-6 fw-bolder">{{ $product->name }}</h1>
 		<div class="mb-3">
-	        <span class="fw-bolder">Rp. {{ number_format($discountInStatus ? $discountText : $product->price) }}</span>
+	        <span class="fw-bolder">Rp. {{ number_format($product->getPrice()) }}</span>
 	        @if($discountInStatus)
 	        <span class="text-decoration-line-through text-muted">Rp. {{ number_format($product->price) }}</span>
 	        <span class="text-azure fw-bolder">({{ $product->discount->discount_percent }}% OFF)</span>
 	        @endif
 	    </div>
 		<p class="card-text">{!! $product->description !!}</p>
-		<small class="text-muted mt-5">In Stock: {{ $product->stock }}</small>
-		<div class="d-flex mt-1">
+		<small class="text-muted mt-5">In Stock: {{ $product->stock }}
+				@error('quantity')
+			   <span class="text-red">* {{ $message }}</span>
+			  @enderror
+		</small>
+		<form class="d-flex mt-1" method="POST" action="{{ route('cart.store') }}" autocomplete="off">
+			@csrf
 			<div>
-			    <input class="form-control text-center me-3 order text-azure" id="inputQuantity" 
-			    type="num" min="1" value="1" style="max-width: 3rem" />
+					<input type="hidden" name="product_id" value="{{ $product->id }}">
+			    <input class="form-control me-3 text-azure @error('quantity') border border-red text-red @enderror" id="quantity" name="quantity" 
+			    type="number" min="1" value="{{ old('quantity', 1) }}" style="max-width: 4rem" />
 			</div>
-		    <button class="btn btn-outline-primary flex-shrink-0" type="button">
+		    <button class="btn btn-outline-primary flex-shrink-0" type="submit">
 		        <i class="bi-cart-fill me-1"></i>
 		        Add to cart
 		    </button>
-		</div>	
+		</form>	
     </div>
   </div>
 </div>
