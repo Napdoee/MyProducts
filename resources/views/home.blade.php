@@ -45,7 +45,7 @@
           <!-- <div class="ribbon ribbon-top bg-azure">NEW</div> -->
           <!-- Photo -->
           <div class="img-responsive img-responsive-16x9 card-img-top" 
-          style="background-image: url({{ asset('storage/images/'.$row->image) }}); object-fit:contain;"></div>
+          style="background-image: url({{ asset('storage/images/'.$row->image) }}); background-size:contain; margin: 10px 0;"></div>
           <!-- <img class="card-img img-thumbnail" src="{{ asset('storage/images/'.$row->image) }}" /> -->
           <div class="card-body">
             @if($discountInStatus)
@@ -57,7 +57,17 @@
                 <p class="card-text">Rp. {{ number_format($discountInStatus ? $discountText : $row->price) }}</p>
             </div>
             <a href="{{ route('product.details', $row->slug) }}" class="btn btn-primary w-100 mb-2">Show Detail</a>
-            <button class="btn btn-outline-primary w-100">Add to Cart</button>
+            <form class="d-flex mt-1" method="POST" action="{{ route('cart.store') }}" autocomplete="off">
+              @csrf
+              <div>
+                  <input type="hidden" name="product_id" value="{{ $row->id }}">
+                  <input id="quantity" name="quantity" type="hidden" min="1" value="1"/>
+              </div>
+                <button class="btn btn-outline-primary w-100" type="submit">
+                    <i class="bi-cart-fill me-1"></i>
+                    Add to cart
+                </button>
+            </form> 
           </div>
           <!-- <div class="card-footer">
             <button class="btn btn-primary w-100 mb-2">Show Detail</button>

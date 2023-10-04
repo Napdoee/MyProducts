@@ -5,10 +5,19 @@
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="{{ route('home') }}">
-              <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+              MyProducts
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
+            @guest
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}" >
+                <span class="nav-link-title">
+                  Login
+                </span>
+              </a>
+            </li>
+            @else
             <li class="nav-item">
               <a class="nav-link" href="{{ route('cart.index') }}" title="Your cart" data-bs-toggle="tooltip"data-bs-placement="bottom">
                 <span class="d-md-none d-lg-inline-block nav-link-icon"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -19,22 +28,18 @@
                      <path d="M6 8h15l-3.5 7l-7.1 -.747a4 4 0 0 1 -3.296 -2.493l-2.853 -7.13a1 1 0 0 0 -.928 -.63h-1.323"></path>
                   </svg>
                 </span>
-                <span class="nav-link-title">
+                <span class="d-none d-md-block nav-link-title">
                   Your Cart
                 </span>
               </a>
             </li>
-            @guest
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}" >
-                <span class="nav-link-title">
-                  Login
-                </span>
-              </a>
-            </li>
-            @else
             <div class="nav-item dropdown">
-              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" title="Open User Menu" data-bs-toggle="tooltip">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon d-xl-none" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                   <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                </svg>
                 <!-- <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span> -->
                 <div class="d-none d-xl-block ps-2">
                   <div class="d-flex align-items-center gap-2">
@@ -49,12 +54,30 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="{{ route('user.profile.edit') }}" class="dropdown-item">Profile</a>
-                <a href="#" class="dropdown-item">Orders</a>
+                <a href="{{ route('user.profile.edit') }}" class="dropdown-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                     <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                  </svg>
+                Profile</a>
+                <a href="{{ route('order.show') }}" class="dropdown-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                     <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                     <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path>
+                     <path d="M9 12l.01 0"></path>
+                     <path d="M13 12l2 0"></path>
+                     <path d="M9 16l.01 0"></path>
+                     <path d="M13 16l2 0"></path>
+                  </svg>
+                Orders</a>
                 <div class="dropdown-divider my-1"></div>
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf
-                  <button type="submit" class="dropdown-item">Logout</button>
+                  <button type="submit" class="dropdown-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon dropdown-item-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+                  Logout</button>
                 </form>
               </div>
             </div>

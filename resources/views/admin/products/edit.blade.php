@@ -96,7 +96,7 @@
 				<div class="col-12 col-md-6">
 					<div class="mb-3">
 						<label class="form-label">Stock Items</label>
-						<input type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" 
+						<input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" 
 						placeholder="Stock" value="{{ old('stock', $product->stock) }}">	
 						@error('stock')
 						<span class="invalid-feedback">{{ $message }}</span>

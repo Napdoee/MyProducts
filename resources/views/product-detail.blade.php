@@ -8,9 +8,12 @@
 @section('content')
 <div class="card mb-3">
   <div class="row g-0">
-    <div class="col-12 col-md-5 p-4">
+    <div class="col-12 col-md-5 p-4 position-relative">
       	<img src="{{ asset('storage/images/'.$product->image) }} " class="rounded-start" alt="{{ $product->name }}"
       	style="width:100%; max-height:70vh; object-fit:contain;">
+        @if($product->stock <= 0)
+        	<div class="w-100 p-2 text-center bg-red-lt position-absolute top-50 start-0 h2">OUT OF STOCK</div>
+        @endif
     </div>
     <div class="card-status-start bg-primary"></div>
     <div class="col-12 col-md-7 rounded p-4 bg-primary-lt">
@@ -32,6 +35,7 @@
 			   <span class="text-red">* {{ $message }}</span>
 			  @enderror
 		</small>
+		@if($product->stock > 0)
 		<form class="d-flex mt-1" method="POST" action="{{ route('cart.store') }}" autocomplete="off">
 			@csrf
 			<div>
@@ -39,11 +43,12 @@
 			    <input class="form-control me-3 text-azure @error('quantity') border border-red text-red @enderror" id="quantity" name="quantity" 
 			    type="number" min="1" value="{{ old('quantity', 1) }}" style="max-width: 4rem" />
 			</div>
-		    <button class="btn btn-outline-primary flex-shrink-0" type="submit">
-		        <i class="bi-cart-fill me-1"></i>
-		        Add to cart
-		    </button>
+	    <button class="btn btn-outline-primary flex-shrink-0" type="submit">
+	        <i class="bi-cart-fill me-1"></i>
+	        Add to cart
+	    </button>
 		</form>	
+		@endif
     </div>
   </div>
 </div>

@@ -18,9 +18,7 @@ class Product extends Model
 
     public function getPrice()
     {
-        $discountPrice = (100/100 - $this->discount->discount_percent/100) * $this->price;
-
-        return $this->getDiscountStatus() ? $discountPrice : $this->price;
+        return $this->getDiscountStatus() ? (100/100 - $this->discount->discount_percent/100) * $this->price : $this->price;
     }
 
     public function getDiscountStatus()

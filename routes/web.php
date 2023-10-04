@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified']
 	Route::get('/', [HomeController::class, 'dashboard']);
 	Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+	Route::get('/order', [OrderController::class, 'getAll'])->name('order.index');
+	Route::get('/order/{order}', [OrderController::class, 'edit'])->name('order.edit');
+	Route::put('/order/{order}', [OrderController::class, 'update'])->name('order.update');
 	Route::resource('product', ProductController::class, ['except' => [
 		'create', 'show'
 	]])->parameters([
@@ -56,11 +60,17 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Mush auth and verified
+//Mush auth and verified USERS
 Route::middleware(['auth', 'verified'])->group(function () {
 	Route::resource('cart', CartController::class, ['only' => [
 		'index', 'store', 'update', 'destroy'
 	]]);
+	Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
+	Route::get('/order', [OrderController::class, 'show'])->name('order.show');
+	Route::post('/checkout', [OrderController::class, 'store'])->name('order.store');
+	// Route::get('/finish', function(){
+	// 	return view('user.finish');
+	// })->name('order.finish');
 });
 
 require __DIR__.'/auth.php';
