@@ -40,7 +40,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				@foreach($categories as $row)
+				@forelse($categories as $row)
 				<tr>
 					<td >{{ $row->category_name }}</td>
 					<td class="flex justify-center items-center">
@@ -68,7 +68,11 @@
 						</form>
 					</td>
 				</tr>
-				@endforeach
+				@empty
+				<tr>
+					<td colspan="100" align="center">No records found</td>
+				<tr>
+				@endforelse
 				</tbody>
 			</table>
 		</div>

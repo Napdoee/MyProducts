@@ -18,7 +18,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			@foreach($orders as $row)
+			@forelse($orders as $row)
 			<tr>
 				<td>{{ $row->id}}</td>
 				<td>{{ $row->user->name }}</td>
@@ -65,7 +65,11 @@
 					</div>
 				</td>
 			</tr>
-			@endforeach
+			@empty
+			<tr>
+				<td colspan="100" align="center">No records found</td>
+			<tr>
+			@endforelse
 			</tbody>
 		</table>
 	</div>

@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $product = Http::get('https://dummyjson.com/products/category/laptops')->body();
+        $product = Http::timeout(3)->get('https://dummyjson.com/products/category/laptops')->body();
         $product_json = json_decode($product);
 
         $category = Category::create(['category_name' => 'laptops']);

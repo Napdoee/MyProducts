@@ -42,7 +42,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				@foreach($discounts as $row)
+				@forelse($discounts as $row)
 				<tr>
 					<td >{{ $row->discount_percent }}</td>
 					<td >{{ $row->description }}</td>
@@ -72,7 +72,11 @@
 						</form>
 					</td>
 				</tr>
-				@endforeach
+				@empty
+				<tr>
+					<td colspan="100" align="center">No records found</td>
+				<tr>
+				@endforelse
 				</tbody>
 			</table>
 		</div>

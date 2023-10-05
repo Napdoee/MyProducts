@@ -44,7 +44,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				@foreach($products as $row)
+				@forelse($products as $row)
 				<tr @if($row->stock <= 0) class="bg-danger-lt" @endif>
 					<td class="align-middle">
 						@if($row->image)
@@ -89,7 +89,11 @@
 						</form>
 					</td>
 				</tr>
-				@endforeach
+				@empty
+				<tr>
+					<td colspan="100" align="center">No records found</td>
+				<tr>
+				@endforelse
 				</tbody>
 			</table>
 		</div>

@@ -21,7 +21,7 @@ class ProductDumpSeeder extends Seeder
     {
         $category = 'automotive';
 
-        $product = Http::get("https://dummyjson.com/products/category/$category")->body();
+        $product = Http::timeout(3)->get("https://dummyjson.com/products/category/$category")->body();
         $product_json = json_decode($product);
 
         $makeCategory = Category::create(['category_name' => $category]);

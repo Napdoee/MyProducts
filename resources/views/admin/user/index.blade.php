@@ -14,7 +14,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			@foreach($users as $row)
+			@forelse($users as $row)
 			<tr>
 				<td>{{ $row->name }}</td>
 				<td><span class="{{ ($row->email_verified_at) ? 'text-success' : 'text-danger' }}">
@@ -46,7 +46,11 @@
 					</form>
 				</td>
 			</tr>
-			@endforeach
+			@empty
+			<tr>
+				<td colspan="100" align="center">No records found</td>
+			<tr>
+			@endforelse
 			</tbody>
 		</table>
 	</div>
