@@ -128,20 +128,20 @@
 	                  		<td>
 	                  			<a class="strong mb-1 text-primary" href="{{ route('product.details', $row->product->slug) }}">{{ "(".$row->quantity."x) ".$row->product->name}}</a>
 		                    </td>
-		                    <td class="text-end">Rp. {{ number_format($row->total) }}</td>
+		                    <td class="text-end">${{ number_format($row->total) }}</td>
 		                </tr>
 		                @endforeach
 		                <tr>
 		                    <td class="font-weight-bold text-end">Subtotal</td>
-		                    <td class="font-weight-bold text-end">Rp. {{ number_format($row->itemsPrice()) }}</td>
+		                    <td class="font-weight-bold text-end">${{ number_format($row->itemsPrice()) }}</td>
 		                </tr>
 		                <tr>
 		                    <td class="font-weight-bold text-end">Tax</td>
-		                    <td class="font-weight-bold text-end">Rp. {{ number_format($row->getTax()) }}</td>
+		                    <td class="font-weight-bold text-end">${{ number_format($row->getTax()) }}</td>
 		                </tr>
 		                <tr>
 		                    <td class="font-weight-bold text-uppercase text-end">Total Due</td>
-		                    <td class="font-weight-bold text-end">Rp. {{ number_format($row->totalItemsPrice()) }}</td>
+		                    <td class="font-weight-bold text-end">${{ number_format($row->totalItemsPrice()) }}</td>
 		                </tr>
 	                  </tbody>
 	              	</table>

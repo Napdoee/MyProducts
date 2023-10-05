@@ -54,11 +54,11 @@
 						@endif
 					</td>
 					<td >{{ $row->name }}</td>
-					<td >Rp. {{ number_format($row->price)  }}</td>
+					<td >${{ number_format($row->price)  }}</td>
 					<td>{{ $row->stock }}</td>
 					<td >
 						@if($row->discount_id && $row->discount->active === 1)
-							{{ '(' . $row->discount->discount_percent . '%) Rp. '
+							{{ '(' . $row->discount->discount_percent . '%) $'
 							.number_format((100/100 - $row->discount->discount_percent/100) * $row->price) }}
 						@else
 							{{ 'No Discount' }}

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
-class ProductSeeder extends Seeder
+class ProductDumpSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,15 +19,17 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $product = Http::get('https://dummyjson.com/products/category/laptops')->body();
+        $category = 'automotive';
+
+        $product = Http::get("https://dummyjson.com/products/category/$category")->body();
         $product_json = json_decode($product);
 
-        $category = Category::create(['category_name' => 'laptops']);
+        $makeCategory = Category::create(['category_name' => $category]);
 
         foreach($product_json->products as $item) {
             Product::create([
                 'discount_id' => null,
-                'category_id' => $category->id,
+                'category_id' => $makeCategory->id,
                 'name' => $item->title,
                 'slug' => Str::slug($item->title),
                 'description' => $item->description,

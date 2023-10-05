@@ -76,12 +76,12 @@
                                                     <td>
                                                         <a class="strong mb-1 text-primary" href="#">{{ "(".$item->quantity."x) ".$item->product->name}}</a>
                                                     </td>
-                                                    <td class="text-end">Rp. {{ number_format($item->product->getPrice()) }}</td>
+                                                    <td class="text-end">${{ number_format($item->sub_price) }}</td>
                                                 </tr>
                                                 @endforeach
                                                 <tr>
                                                     <td class="font-weight-bold text-end">DUE TOTAL</td>
-                                                    <td class="font-weight-bold text-end">Rp. {{ number_format($order->total_price) }}</td>
+                                                    <td class="font-weight-bold text-end">${{ number_format($order->total_price) }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

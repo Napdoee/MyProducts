@@ -14,7 +14,7 @@ class Cart extends Model
     protected $table = 'cart_items';
     protected $fillable = ['user_id', 'product_id', 'quantity', 'total'];
 
-    public $tax = 500;
+    public $tax = 25;
 
     public function getTax()
     {

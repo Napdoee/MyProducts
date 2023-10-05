@@ -30,35 +30,17 @@ class HomeController extends Controller
     {
         $categories = Category::latest()->get();
         $search = $request->q;
-        $categoryId = $request->category;
+        $categoryName = $request->category;
 
         $products = Product::where('name', 'LIKE', '%'.$search.'%');
-        if(isset($categoryId)) {
-            $products = $products->where('category_id', $categoryId);
+        if(isset($categoryName)) {
+            $products = $products->whereHas('category', function($query) use($categoryName){
+                $query->where('category_name', $categoryName);
+            });
         }
 
         $products = $products->get();
 
-        return view('products', compact('categories', 'products', 'search', 'categoryId'));
+        return view('products', compact('categories', 'products', 'search', 'categoryName'));
     }
-
-    // public function searchProduct(Request $request)
-    // {
-    //     $search = $request->q;
-    //     $category = $request->category;
-
-    //     $results = Product::where('name', 'LIKE', '%'.$search.'%');
-
-    //     if($request->category != '') {
-    //         $results->where('category_id', $category);
-    //     }
-
-    //     $results = $results->get();
-    //     $values = [
-    //         'query' => $search,
-    //         'category' => $category
-    //     ];
-
-    //     return view('products', compact('results', 'values'));
-    // }
 }

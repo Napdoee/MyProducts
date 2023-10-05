@@ -53,13 +53,13 @@
 			            	(In Stock: {{ $row->product->stock }})
 			            </small>
 			          </div>
-			          <div class="col-auto fs-3 text-green"><span class="text-muted">(x{{ $row->quantity }})</span> Rp. {{ number_format($row->total) }}</div>
+			          <div class="col-auto fs-3 text-green"><span class="text-muted">(x{{ $row->quantity }})</span> ${{ number_format($row->total) }}</div>
 			        </div>
 			        <div class="row">
 			          <div class="col-md">
 			            <div class="mt-3 list-inline list-inline-dots mb-0 text-muted d-sm-block d-none">
 			              <div class="list-inline-item"><!-- Download SVG icon from http://tabler-icons.io/i/license -->
-			              		<span class="fw-bolder">Rp. {{ number_format($row->product->getPrice()) }}</span>
+			              		<span class="fw-bolder">${{ number_format($row->product->getPrice()) }}</span>
 			              		@if($row->product->getDiscountStatus())
 		        							<span class="text-azure fw-bolder">({{ $row->product->discount->discount_percent }}% OFF)</span>
 		        						@endif
@@ -67,7 +67,7 @@
 			            </div>
 			            <div class="mt-3 list mb-0 text-muted d-block d-sm-none">
 			              <div class="list-inline-item"><!-- Download SVG icon from http://tabler-icons.io/i/license -->
-			              		<span class="fw-bolder">Rp. {{ number_format($row->product->getPrice()) }}</span>
+			              		<span class="fw-bolder">${{ number_format($row->product->getPrice()) }}</span>
 			              		@if($row->product->getDiscountStatus())
 		        						<span class="text-azure fw-bolder">({{ $row->product->discount->discount_percent }}% OFF)</span>
 		        						@endif
@@ -129,16 +129,16 @@
 				<div class="card-body">
 					<div class="d-flex justify-content-between">
 						<p>Subtotal</p>
-						<p>Rp. {{ number_format($row->itemsPrice()) }}</p>
+						<p>${{ number_format($row->itemsPrice()) }}</p>
 					</div>
 					<div class="d-flex justify-content-between">
 						<p>Estimated Tax</p>
-						<p>Rp. {{ number_format($row->getTax()) }}</p>
+						<p>${{ number_format($row->getTax()) }}</p>
 					</div>
 					<hr class="my-3" />
 					<div class="d-flex justify-content-between m-0">
 						<p>GrandTotal</p>
-						<p>Rp. {{ number_format($row->totalItemsPrice()) }}</p>
+						<p>${{ number_format($row->totalItemsPrice()) }}</p>
 					</div>
 					<hr class="mt-0 mb-4" />
 					<!-- <button class="btn btn-primary w-100" type="submit">Checkout</button> -->

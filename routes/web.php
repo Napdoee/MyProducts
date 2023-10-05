@@ -10,7 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Http;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +21,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route::get('/test', function() {
+// 	$response = Http::get('https://dummyjson.com/products', [
+// 		'limit' => 5
+// 	])->body();
+// 	$response_json = json_decode($response);
+
+// 	$data = [];
+// 	foreach($response_json->products as $item) {
+// 		$data[] = $item->title;
+// 	}
+
+// 	return $data;
+// });
 
 //Public 
 Route::get('/', [HomeController::class, 'index']);
