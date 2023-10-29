@@ -32,7 +32,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('user.index')->with([
+        return redirect()->route('admin.user.index')->with([
             'message' => 'User Updated',
             'status' => 'info',
         ]);
@@ -47,17 +47,17 @@ class UserController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('user.index')->with([
+        return redirect()->route('admin.user.index')->with([
             'message' => 'User password changed',
             'status' => 'info',
         ]);
     }
 
-    public function destroy(Discount $discount)
+    public function destroy(User $user)
     {
-        $discount->delete();
+        $user->delete();
 
-        return redirect()->route('user.index')->with([
+        return redirect()->route('admin.user.index')->with([
             'message' => 'User Deleted',
             'status' => 'danger',
         ]);

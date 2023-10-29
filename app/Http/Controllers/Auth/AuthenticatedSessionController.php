@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return RouteServiceProvider::redirectWithRoles($request, ['verified' => '1']);
+        return redirect()->intended('/');
     }
 
     /**

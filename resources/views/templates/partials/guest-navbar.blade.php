@@ -4,7 +4,11 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="{{ route('home') }}">
+            @if(Auth::user()?->roles == 'admin') 
+              <a href="{{ route('admin.dashboard') }}">
+            @else
+              <a href="{{ route('home') }}">
+            @endif
               MyProducts
             </a>
           </h1>
